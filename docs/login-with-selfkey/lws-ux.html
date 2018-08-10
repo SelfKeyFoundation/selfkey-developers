@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>LWS UX Summary · Developers</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="1. A user walks into a bar, opens up their macbook and goes to bennytrade.com, clicks the Login with SelfKey button..."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="LWS UX Summary · Developers"/><meta property="og:type" content="website"/><meta property="og:url" content="https://developers.selfkey.org/index.html"/><meta property="og:description" content="1. A user walks into a bar, opens up their macbook and goes to bennytrade.com, clicks the Login with SelfKey button..."/><meta property="og:image" content="https://developers.selfkey.org/img/logo.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://developers.selfkey.org/img/logo.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/obsidian.min.css"/><link rel="alternate" type="application/atom+xml" href="https://developers.selfkey.org/blog/atom.xml" title="Developers Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://developers.selfkey.org/blog/feed.xml" title="Developers Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/logo.png" alt="Developers"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/getting-started/selfkey-intro.html" target="_self">Docs</a></li><li class=""><a href="/docs/resources/overview.html" target="_self">Resources</a></li><li class=""><a href="/en/help.html" target="_self">Help</a></li><li class=""><a href="/blog" target="_self">Blog</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Login with SelfKey</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting Started</h3><ul><li class="navListItem"><a class="navItem" href="/docs/getting-started/selfkey-intro.html">About SelfKey</a></li><li class="navListItem"><a class="navItem" href="/docs/getting-started/key-token-intro.html">KEY Token Contract</a></li><li class="navListItem"><a class="navItem" href="/docs/getting-started/idw-intro.html">SelfKey Identity Wallet</a></li><li class="navListItem"><a class="navItem" href="/docs/getting-started/skc-intro.html">SelfKey Connect (Browser Ext.)</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Marketplace Integrations</h3><ul><li class="navListItem"><a class="navItem" href="/docs/marketplace/marketplace-intro.html">About the Marketplace</a></li><li class="navListItem"><a class="navItem" href="/docs/marketplace/marketplace-api.html">Marketplace API</a></li><li class="navListItem"><a class="navItem" href="/docs/marketplace/marketplace-exchanges.html">Exchanges</a></li><li class="navListItem"><a class="navItem" href="/docs/marketplace/marketplace-incorporations.html">Incorporations</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Login with SelfKey</h3><ul><li class="navListItem"><a class="navItem" href="/docs/login-with-selfkey/lws-intro.html">About Login with SelfKey</a></li><li class="navListItem"><a class="navItem" href="/docs/login-with-selfkey/lws-flow.html">Technical Flow Diagram</a></li><li class="navListItem"><a class="navItem" href="/docs/login-with-selfkey/lws-auth.html">Authentication Process</a></li><li class="navListItem"><a class="navItem" href="/docs/login-with-selfkey/lws-data.html">Data and Document Transfer</a></li><li class="navListItem"><a class="navItem" href="/docs/login-with-selfkey/lws-client.html">Client Configuration</a></li><li class="navListItem"><a class="navItem" href="/docs/login-with-selfkey/lws-server.html">Server Implementation</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/login-with-selfkey/lws-ux.html">User Experience</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Additional Projects</h3><ul><li class="navListItem"><a class="navItem" href="/docs/additional-projects/json-schema-intro.html">SelfKey JSON Schema</a></li><li class="navListItem"><a class="navItem" href="/docs/additional-projects/staking-intro.html">Staking KEY</a></li><li class="navListItem"><a class="navItem" href="/docs/additional-projects/did-intro.html">DID and Identity</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">LWS UX Summary</h1></header><article><div><span><ol>
+<li>A user walks into a bar, opens up their macbook and goes to bennytrade.com, clicks the Login with SelfKey button...
+<ul>
+<li>They don't have the BE installed yet (IDW installed doesn't matter at this point)
+<ul>
+<li>Beta Test - They are directed in a new tab to the SelfKey Download centre that has detailed install instructions, links to downloads etc...</li>
+<li>Product</li>
+</ul></li>
+<li>They have the BE installed but they don't have the IDW installed
+<ul>
+<li>The BE pops up some UI panel and directs them to the download center OR directly provides them links to the IDW download</li>
+</ul></li>
+<li>They have everything installed and running then...</li>
+</ul></li>
+<li>When they return to the browser tab of bennytrade.com,
+<ul>
+<li>the page detects the BE is installed and enabled</li>
+<li>the BE modifies the DOM using the injection script</li>
+<li>begins the init process to test connections with the IDW and Server</li>
+</ul></li>
+<li>BE is enabled, auto tests connection to both IDW and Server
+<ul>
+<li>gets the host server URL from the page they are on and concatenate with endpoint</li>
+<li>if either connection fails show the error screen with instructions what to do next</li>
+<li>many cases, error messages and steps to handle</li>
+</ul></li>
+<li>BE can confirm working connections to the IDW and Server
+<ul>
+<li>requests the server to init the auth flow</li>
+</ul></li>
+<li>Server returns a response object with
+<ul>
+<li>&quot;requested login information&quot; data</li>
+<li>a nonce which has been generated (uses selfkey.js)</li>
+<li>the nonce is saved in the DB in a user object (See server side user login/signup flow below)</li>
+</ul></li>
+<li>BE sends the nonce to the IDW and requests back the available wallets
+<ul>
+<li>if no wallets prompt the user to create one</li>
+</ul></li>
+<li>IDW returns all available wallets
+<ul>
+<li>displays the wallet select view asks user to select one</li>
+<li>reminds them to make sure that wallet is active and unlocked in their wallet</li>
+</ul></li>
+<li>BE requests a signature of that wallet using:
+<ul>
+<li>the server generated nonce</li>
+<li>the local private key in the IDW</li>
+</ul></li>
+<li>IDW creates a signature using the selfkey.js library
+<ul>
+<li>sends the signature, nonce and pubKey to the BE</li>
+</ul></li>
+<li>Server queries the DB for the matching nonce associated with the user object
+<ul>
+<li>verifies the signature using the selfkey.js library</li>
+<li>if it’s all good adds the pubKey to the user object</li>
+<li>creates a session using the passport-selfkey strategy</li>
+</ul></li>
+</ol>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/login-with-selfkey/lws-server.html">← Server Implementation</a><a class="docs-next button" href="/docs/additional-projects/json-schema-intro.html">SelfKey JSON Schema →</a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><a href="/" class="nav-home"><img src="/img/logo.png" alt="Developers" height="60"/></a><section class="sitemap"><div><h5>Docs</h5><a href="/docs/en/selfkey-intro.html">Getting Started</a><a href="/docs/en/marketplace-intro.html">Marketplace Integration</a><a href="/docs/en/lws-intro.html">Login with Selfkey</a><a href="/docs/en/json-schema-intro.html">Additional Projects</a></div><div><h5>Resources</h5><a href="/en/resources.html">View All Resources</a><a href="/en/lws-nodejs.html">NodeJS SDK</a><a href="https://twitter.com/SelfKeyDevelopers" target="_blank" rel="noreferrer noopener">Selfkey Developer Twitter</a></div><div><h5>More</h5><a href="/blog">SelfKey Developer Blog</a><a href="https://github.com/SelfKeyFoundation">SelfKey GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/SelfKeyFoundation/Identity-Wallet" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2018 SelfKey Foundation</section></footer></div><script src="http://localhost:35729/livereload.js"></script></body></html>

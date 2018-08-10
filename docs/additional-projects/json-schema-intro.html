@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>SelfKey JSON Schema · Developers</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## SelfKey JSON Schema"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="SelfKey JSON Schema · Developers"/><meta property="og:type" content="website"/><meta property="og:url" content="https://developers.selfkey.org/index.html"/><meta property="og:description" content="## SelfKey JSON Schema"/><meta property="og:image" content="https://developers.selfkey.org/img/logo.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://developers.selfkey.org/img/logo.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/obsidian.min.css"/><link rel="alternate" type="application/atom+xml" href="https://developers.selfkey.org/blog/atom.xml" title="Developers Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://developers.selfkey.org/blog/feed.xml" title="Developers Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/logo.png" alt="Developers"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/getting-started/selfkey-intro.html" target="_self">Docs</a></li><li class=""><a href="/docs/resources/overview.html" target="_self">Resources</a></li><li class=""><a href="/en/help.html" target="_self">Help</a></li><li class=""><a href="/blog" target="_self">Blog</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Additional Projects</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting Started</h3><ul><li class="navListItem"><a class="navItem" href="/docs/getting-started/selfkey-intro.html">About SelfKey</a></li><li class="navListItem"><a class="navItem" href="/docs/getting-started/key-token-intro.html">KEY Token Contract</a></li><li class="navListItem"><a class="navItem" href="/docs/getting-started/idw-intro.html">SelfKey Identity Wallet</a></li><li class="navListItem"><a class="navItem" href="/docs/getting-started/skc-intro.html">SelfKey Connect (Browser Ext.)</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Marketplace Integrations</h3><ul><li class="navListItem"><a class="navItem" href="/docs/marketplace/marketplace-intro.html">About the Marketplace</a></li><li class="navListItem"><a class="navItem" href="/docs/marketplace/marketplace-api.html">Marketplace API</a></li><li class="navListItem"><a class="navItem" href="/docs/marketplace/marketplace-exchanges.html">Exchanges</a></li><li class="navListItem"><a class="navItem" href="/docs/marketplace/marketplace-incorporations.html">Incorporations</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Login with SelfKey</h3><ul><li class="navListItem"><a class="navItem" href="/docs/login-with-selfkey/lws-intro.html">About Login with SelfKey</a></li><li class="navListItem"><a class="navItem" href="/docs/login-with-selfkey/lws-flow.html">Technical Flow Diagram</a></li><li class="navListItem"><a class="navItem" href="/docs/login-with-selfkey/lws-auth.html">Authentication Process</a></li><li class="navListItem"><a class="navItem" href="/docs/login-with-selfkey/lws-data.html">Data and Document Transfer</a></li><li class="navListItem"><a class="navItem" href="/docs/login-with-selfkey/lws-client.html">Client Configuration</a></li><li class="navListItem"><a class="navItem" href="/docs/login-with-selfkey/lws-server.html">Server Implementation</a></li><li class="navListItem"><a class="navItem" href="/docs/login-with-selfkey/lws-ux.html">User Experience</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Additional Projects</h3><ul><li class="navListItem navListItemActive"><a class="navItem" href="/docs/additional-projects/json-schema-intro.html">SelfKey JSON Schema</a></li><li class="navListItem"><a class="navItem" href="/docs/additional-projects/staking-intro.html">Staking KEY</a></li><li class="navListItem"><a class="navItem" href="/docs/additional-projects/did-intro.html">DID and Identity</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">SelfKey JSON Schema</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="selfkey-json-schema"></a><a href="#selfkey-json-schema" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>SelfKey JSON Schema</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus elementum massa eget nulla aliquet sagittis. Proin odio tortor, vulputate ut odio in, ultrices ultricies augue. Cras ornare ultrices lorem malesuada iaculis. Etiam sit amet libero tempor, pulvinar mauris sed, sollicitudin sapien.</p>
+<h2><a class="anchor" aria-hidden="true" id="attribute-schema"></a><a href="#attribute-schema" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Attribute Schema</h2>
+<pre><code class="hljs css languages- json">{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"http://platform.selfkey.org/schema/attribute/public-key.json"</span>,
+  <span class="hljs-attr">"$schema"</span>: <span class="hljs-string">"http://platform.selfkey.org/schema/identity-attribute.json"</span>,
+  <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Public Key"</span>,
+  <span class="hljs-attr">"description"</span>: <span class="hljs-string">"A cryptographic public key."</span>,
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="document-schema"></a><a href="#document-schema" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Document Schema</h2>
+<pre><code class="hljs css languages- json">{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"http://platform.selfkey.org/schema/attribute/passport.json"</span>,
+  <span class="hljs-attr">"$schema"</span>: <span class="hljs-string">"http://platform.selfkey.org/schema/identity-attribute.json"</span>,
+  <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Passport"</span>,
+  <span class="hljs-attr">"description"</span>: <span class="hljs-string">"A copy of an individuals passport."</span>,
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"object"</span>,
+  <span class="hljs-attr">"properties"</span>: {
+    <span class="hljs-attr">"image"</span>: {
+      <span class="hljs-attr">"anyOf"</span>: [
+        {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>,
+          <span class="hljs-attr">"contentEncoding"</span>: <span class="hljs-string">"base64"</span>,
+          <span class="hljs-attr">"contentMediaType"</span>: <span class="hljs-string">"image/jpg"</span>
+        },
+        {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>,
+          <span class="hljs-attr">"contentEncoding"</span>: <span class="hljs-string">"base64"</span>,
+          <span class="hljs-attr">"contentMediaType"</span>: <span class="hljs-string">"image/png"</span>
+        },
+        {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>,
+          <span class="hljs-attr">"contentEncoding"</span>: <span class="hljs-string">"base64"</span>,
+          <span class="hljs-attr">"contentMediaType"</span>: <span class="hljs-string">"application/pdf"</span>
+        }, 
+      ]
+    }
+  },
+  <span class="hljs-attr">"required"</span>: [ <span class="hljs-string">"image"</span> ]
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="custom-extended-schema"></a><a href="#custom-extended-schema" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Custom Extended Schema</h2>
+<pre><code class="hljs css languages- json">{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"http://bigco.com/schema/membership.json"</span>,
+  <span class="hljs-attr">"$schema"</span>: <span class="hljs-string">"http://platform.selfkey.org/schema/identity-attribute.json"</span>,
+  <span class="hljs-attr">"title"</span>: <span class="hljs-string">"BigCo Membership"</span>,
+  <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Membership credentials for the BigCo Membership Programme."</span>,
+  <span class="hljs-attr">"issuers"</span>: [<span class="hljs-string">"0x19674964C63cc8bd761eB857278aF46f25a80F61"</span>],
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"object"</span>,
+  <span class="hljs-attr">"properties"</span>: {
+    <span class="hljs-attr">"memberNumber"</span>: { <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span> },
+    <span class="hljs-attr">"validUntil"</span>: { <span class="hljs-attr">"type"</span>: <span class="hljs-string">"number"</span>, <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Unix timestamp at which time this credential expires"</span> },
+    <span class="hljs-attr">"signature"</span>: { <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span> }
+  },
+  <span class="hljs-attr">"required"</span>: [<span class="hljs-string">"memberNumber"</span>, <span class="hljs-string">"validUntil"</span>, <span class="hljs-string">"signature"</span>]
+}
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/login-with-selfkey/lws-ux.html">← LWS UX Summary</a><a class="docs-next button" href="/docs/additional-projects/staking-intro.html">Staking KEY →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#selfkey-json-schema">SelfKey JSON Schema</a></li><li><a href="#attribute-schema">Attribute Schema</a></li><li><a href="#document-schema">Document Schema</a></li><li><a href="#custom-extended-schema">Custom Extended Schema</a></li></ul></nav></div><footer class="nav-footer" id="footer"><a href="/" class="nav-home"><img src="/img/logo.png" alt="Developers" height="60"/></a><section class="sitemap"><div><h5>Docs</h5><a href="/docs/en/selfkey-intro.html">Getting Started</a><a href="/docs/en/marketplace-intro.html">Marketplace Integration</a><a href="/docs/en/lws-intro.html">Login with Selfkey</a><a href="/docs/en/json-schema-intro.html">Additional Projects</a></div><div><h5>Resources</h5><a href="/en/resources.html">View All Resources</a><a href="/en/lws-nodejs.html">NodeJS SDK</a><a href="https://twitter.com/SelfKeyDevelopers" target="_blank" rel="noreferrer noopener">Selfkey Developer Twitter</a></div><div><h5>More</h5><a href="/blog">SelfKey Developer Blog</a><a href="https://github.com/SelfKeyFoundation">SelfKey GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/SelfKeyFoundation/Identity-Wallet" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2018 SelfKey Foundation</section></footer></div><script src="http://localhost:35729/livereload.js"></script></body></html>
