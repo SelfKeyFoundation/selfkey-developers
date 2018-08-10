@@ -23,8 +23,8 @@ const users = [
 const siteConfig = {
   title: 'Developers',
   tagline: 'Developer Support for SelfKey Projects',
-  url: 'https://selfkeyfoundation.github.io/selfkey-developers',
-  baseUrl: '/',
+  url: 'https://selfkeyfoundation.github.io',
+  baseUrl: '/selfkey-developers',
 
   // Used for publishing and more
   projectName: 'selfkey-developers',
