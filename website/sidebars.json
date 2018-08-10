@@ -1,0 +1,53 @@
+{
+  "docs": {
+    "Getting Started": [
+      "getting-started/selfkey-intro",
+      "getting-started/key-token-intro", 
+      "getting-started/idw-intro", 
+      "getting-started/skc-intro"
+    ],
+    "Marketplace Integrations": [
+      "marketplace/marketplace-intro",
+      "marketplace/marketplace-api",
+      "marketplace/marketplace-exchanges", 
+      "marketplace/marketplace-incorporations"
+    ],
+    "Login with SelfKey": [
+      "login-with-selfkey/lws-intro", 
+      "login-with-selfkey/lws-flow", 
+      "login-with-selfkey/lws-auth",
+      "login-with-selfkey/lws-data", 
+      "login-with-selfkey/lws-client", 
+      "login-with-selfkey/lws-server", 
+      "login-with-selfkey/lws-ux"
+    ],
+    "Additional Projects": [
+      "additional-projects/json-schema-intro", 
+      "additional-projects/staking-intro",
+      "additional-projects/did-intro"
+    ]
+  },
+  "resources": {
+    "Developer Resources": [
+      "resources/overview"
+    ],
+    "LWS Client Libraries": [
+      "resources/lws-js",
+      "resources/lws-react",
+      "resources/lws-angular",
+      "resources/lws-ios",
+      "resources/lws-android"
+    ],
+    "LWS Server Libraries": [
+      "resources/lws-nodejs",
+      "resources/lws-cs",
+      "resources/lws-java",
+      "resources/lws-php",
+      "resources/lws-ruby",
+      "resources/lws-python"
+    ],
+    "Additional Projects": [
+      "resources/did-nodejs"
+    ]
+  }
+}
