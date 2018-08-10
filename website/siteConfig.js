@@ -24,10 +24,10 @@ const siteConfig = {
   title: 'Developers',
   tagline: 'Developer Support for SelfKey Projects',
   url: 'https://selfkeyfoundation.github.io',
-  baseUrl: '/',
+  baseUrl: '/pages/SelfKeyFoundation/selfkey-developers/',
 
   // Used for publishing and more
-  projectName: 'selfkeyfoundation.github.io',
+  projectName: 'selfkey-developers',
   organizationName: 'SelfKeyFoundation',
 
   // For no header links in the top nav bar -> headerLinks: [],
