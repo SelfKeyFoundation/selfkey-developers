@@ -78,7 +78,7 @@ class HomeSplash extends React.Component {
             Enable one-click KYC document submission, private key based passwordless authentication systems and more.
           </p>
           <PromoSection>
-            <Button href={docUrl('selfkey-intro.html', language)}>Learn More</Button>
+            <Button href={docUrl('getting-started/selfkey-intro.html', language)}>Learn More</Button>
           </PromoSection>
         </div>
       </SplashContainer>
@@ -130,7 +130,7 @@ const FeatureCallout = props => (
     <h2>Start Integrating with SelfKey Now</h2>
     <MarkdownBlock>Start reading the developer documentation and download integeration resources for your specific tech stack.</MarkdownBlock>
     <PromoSection>
-        <Button href={docUrl('selfkey-intro.html')}>Get Started Now</Button>
+        <Button href={docUrl('getting-started/selfkey-intro.html')}>Get Started Now</Button>
     </PromoSection>
   </div>
 );
