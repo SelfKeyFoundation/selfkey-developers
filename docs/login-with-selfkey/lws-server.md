@@ -4,7 +4,15 @@ title: Server Implementation
 sidebar_label: Server Implementation
 ---
 
-## Implementing the Login with SelfKey API
+## Server Library Overview
+* Dynamic resolution of server domain and routes
+* Dynamic config of requested info
+* Session management for:
+	* New User (create account w/ LWS info)
+	* Existing User w/o LWS (add LWS to email user)
+	* Existing User w/ LWS (add wallet)
+
+## Implementing the LWS API
 
 Your web service must expose the following API endpoints relative to the path defined in the client config object to be compatible with Login with SelfKey.
 

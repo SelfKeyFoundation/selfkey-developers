@@ -19,7 +19,8 @@
       "login-with-selfkey/lws-data", 
       "login-with-selfkey/lws-client", 
       "login-with-selfkey/lws-server", 
-      "login-with-selfkey/lws-ux"
+      "login-with-selfkey/lws-ux",
+      "login-with-selfkey/lws-sandbox"
     ],
     "Additional Projects": [
       "additional-projects/json-schema-intro", 

@@ -13,7 +13,7 @@ In order for the LWS system to work, the user needs to be able to provide proof 
 // hash the nonce and create the signature
 
 function createSignature(nonce, privKey) {
-	const msgHash = ethUtil.hashPersonalMessage(Buffer.from(challenge, 'hex')) 
+	const msgHash = ethUtil.hashPersonalMessage(Buffer.from(nonce, 'hex')) 
 	const signature = ethUtil.ecsign(msgHash, Buffer.from(privKey, 'hex'))
 	return signature
 }
@@ -21,8 +21,8 @@ function createSignature(nonce, privKey) {
 
 ## Signature Verification
 ```javascript
-// verifies the signature using the generated nonce
-// checks that the user requested and signature resolved public key match correctly
+// verifies the signature using the nonce
+// checks that the signature resolved public key match correctly
 
 function verifySignature(nonce, signature, pubKey) {
 	const msgHash = ethUtil.hashPersonalMessage(Buffer.from(nonce, 'hex'))

@@ -6,7 +6,7 @@ sidebar_label: SelfKey JSON Schema
 
 ## SelfKey JSON Schema
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus elementum massa eget nulla aliquet sagittis. Proin odio tortor, vulputate ut odio in, ultrices ultricies augue. Cras ornare ultrices lorem malesuada iaculis. Etiam sit amet libero tempor, pulvinar mauris sed, sollicitudin sapien.
+In order to solve certain issues around the area of data harmonization and compatibility regarding the management of data and documents using the SelfKey Identity Wallet and the transfer of data with 3rd party integrators, SelfKey has developed a JSON Schema to manage requested data formatting.  The schema is available at http://platform.selfkey.org/schema
 
 ## Attribute Schema
 

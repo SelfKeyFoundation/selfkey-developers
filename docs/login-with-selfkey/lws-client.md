@@ -4,6 +4,12 @@ title: Client Configuration
 sidebar_label: Client Configuration
 ---
 
+## Client Library Overview
+* Provides the Login with SelfKey Button
+* Provides a Modal for displaying LWS related views
+* Provides an iFrame embedded in the modal to view the Browser extension
+* Provides all assets for embedded components (CSS/JS/Images/Fonts)
+
 ## Login with SelfKey Client Configuration
 
 The Login with SelfKey client library accepts a configuration object containing the following attributes:
