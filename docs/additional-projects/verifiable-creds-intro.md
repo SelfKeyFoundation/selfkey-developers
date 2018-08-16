@@ -15,8 +15,9 @@ These are a few example use cases for verifiable credentials:
 * An individual (as an identity owner) gives explicit consent to an institution or company to perform certain actions or utilize given personal data on the owner’s behalf.
 * A company states that a given person is an active employee in the company or was an employee for a given time period.
 
-…The possibilities are endlesss, from the most “institutional” use cases such as the ones mentioned, to the most “casual” such as proofs of community group membership or simply “friendship status” on a decentralized social network.
 
 Also, it’s important to note that verifiable credentials can be stored and shared privately, thus preserving the principle of privacy that is characteristic of self-sovereign identity.
+
+SelfKey is implementing mechanisms, protocols and libraries to provide DID owners with the capability to issue and verify credentials that can be shared privately or publicly, and operate with those within a self-sovereign ecosystem fueled by token economy.
 
 SelfKey is actively participating in research and discussions around the topics of DID's and Verifiable Credentials with the goal of finding real world use cases to implement.
