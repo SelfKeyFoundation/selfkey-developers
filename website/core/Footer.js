@@ -34,16 +34,16 @@ class Footer extends React.Component {
         <section className="sitemap">
           <div>
             <h5>Docs</h5>
-            <a href={this.docUrl('selfkey-intro.html', this.props.language)}>
+            <a href={this.docUrl('getting-started/selfkey-intro.html', this.props.language)}>
               Getting Started
             </a>
-            <a href={this.docUrl('marketplace-intro.html', this.props.language)}>
+            <a href={this.docUrl('marketplace/marketplace-intro.html', this.props.language)}>
               Marketplace Integration
             </a>
-            <a href={this.docUrl('lws-intro.html', this.props.language)}>
+            <a href={this.docUrl('login-with-selfkey/lws-intro.html', this.props.language)}>
               Login with Selfkey
             </a>
-            <a href={this.docUrl('json-schema-intro.html', this.props.language)}>
+            <a href={this.docUrl('additional-projects/json-schema-intro.html', this.props.language)}>
               Additional Projects
             </a>
           </div>

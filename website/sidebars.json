@@ -25,7 +25,8 @@
     "Additional Projects": [
       "additional-projects/json-schema-intro", 
       "additional-projects/staking-intro",
-      "additional-projects/did-intro"
+      "additional-projects/did-intro",
+      "additional-projects/verifiable-creds-intro"
     ]
   },
   "resources": {
