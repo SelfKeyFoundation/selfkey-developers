@@ -49,11 +49,11 @@ class Footer extends React.Component {
           </div>
           <div>
             <h5>Resources</h5>
-            <a href={this.pageUrl('resources.html', this.props.language)}>
+            <a href={this.pageUrl('resources/overview.html', this.props.language)}>
               View All Resources
             </a>
-            <a href={this.pageUrl('lws-nodejs.html', this.props.language)}>
-              NodeJS SDK
+            <a href={this.pageUrl('resources/lws-nodejs.html', this.props.language)}>
+              Login with SelfKey NodeJS SDK
             </a>
             <a
               href="https://twitter.com/SelfKeyDevelopers"
@@ -65,7 +65,7 @@ class Footer extends React.Component {
           <div>
             <h5>More</h5>
             <a href={this.props.config.baseUrl + 'blog'}>SelfKey Developer Blog</a>
-            <a href="https://github.com/SelfKeyFoundation">SelfKey GitHub</a>
+            <a href="https://github.com/SelfKeyFoundation">SelfKey Foundation GitHub</a>
             <a
               className="github-button"
               href={this.props.config.repoUrl}
