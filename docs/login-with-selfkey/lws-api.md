@@ -9,11 +9,12 @@ This part of the system is running before in the background before any user inte
 
 ## 1: Preflight Connect Checks
 
-### 1.a: LWS_INIT
+### 1.a LWS_INIT
 * **Source:** Client Implementation
 * **Target:** SK Connect Content Script
-* **Endpoint:**  `/LWS_INIT`
-* **Protocol:**  Chrome Messaging
+* **Endpoint:** `/LWS_INIT`
+* **Protocol:** Chrome Messaging
+* **Description:** Initial test connection between the client implementation in the browser DOM and the SelfKey Connect Browser extension via the injected content script.  If the client cannot connect with the browser extension, and error message will be returned which will indicate to the client implementation to display user instructions regarding the installing and running the required components. (SelfKey Connect Browser Extension and SelfKey Identity Wallet)
 
 **Request Example**
 ```json
@@ -34,11 +35,12 @@ This part of the system is running before in the background before any user inte
 }
 ```
 
-### 1.b: CONNECT
+### 1.b CONNECT
 * **Source:** SK Connect Content Script
 * **Target:** SK Connect Background Script
-* **Endpoint:**  `/CONNECT`
-* **Protocol:**  Chrome Messaging
+* **Endpoint:** `/CONNECT`
+* **Protocol:** Chrome Messaging
+* **Description:** Passes the init message internally within the SelfKey Connect Browser Extension from the content script to the background script in preparation for testing the connection with the SelfKey Identity Wallet.
 
 **Request Example**
 ```json
@@ -62,8 +64,9 @@ This part of the system is running before in the background before any user inte
 ### 1.c CONNECT
 * **Source:** SK Connect Background Script
 * **Target:** SK Identity Wallet
-* **Endpoint:**  `/CONNECT`
-* **Protocol:**  Websocket Connection
+* **Endpoint:** `/CONNECT`
+* **Protocol:** Websocket Connection
+* **Description:** Tests the connection between the SelfKey Connect Browser Extension and the SelfKey Identity Wallet via a secure WebSocket Connection.  If the connection fails an error message will be returned that will allow the Browser Extension UI to dispal instructions regarding how to install and run the SelfKey Identity Wallet.
 
 **Request Example**
 ```json
@@ -87,8 +90,9 @@ This part of the system is running before in the background before any user inte
 ### 1.d CONNECT
 * **Source:** SK Identity Wallet
 * **Target:** Server Implementation
-* **Endpoint:**  `/CONNECT`
-* **Protocol:**  HTTP Request
+* **Endpoint:** `/CONNECT`
+* **Protocol:** HTTP Request
+* **Description:** Tests the connection between the SelfKey Identity Wallet and the Server Implementation via HTTP request.  If the connection fails an error will be returned to disable any attempt to begin the authentication process as it cannot work without access to a server implementation.
 
 **Request Example**
 ```json
@@ -119,8 +123,9 @@ After the preflight checks are successful and all components are installed, runn
 ### 2.a AUTH_REQUEST
 * **Source:** Client Implementation
 * **Target:** SK Connect Content Script
-* **Endpoint:**  `/AUTH_REQUEST`
-* **Protocol:**  Chrome Messaging
+* **Endpoint:** `/AUTH_REQUEST`
+* **Protocol:** Chrome Messaging
+* **Description:** Begins the actual authentication process for Login with SelfKey by sending a message to the SelfKey Connect Browser Extension.  If the complete authentication process is successful, a redirect link will be returned and the users browser tab will be updated to reflect the redirect url.  The redirect URL is fully customizable from within the server implementation.  
 
 **Request Example**
 ```json
@@ -148,8 +153,9 @@ After the preflight checks are successful and all components are installed, runn
 ### 3.a WALLETS_REQUEST
 * **Source:** SK Connect iFrame
 * **Target:** SK Connect Background Script
-* **Endpoint:**  `/WALLETS_REQUEST`
-* **Protocol:**  Chrome Messaging
+* **Endpoint:** `/WALLETS_REQUEST`
+* **Protocol:** Chrome Messaging
+* **Description:** A message sent from the SK Connect iFrame to the Background Script which will be forwarded as a request to get information about available wallets associated with the users SelfKey Identity Wallet.  A successful request will return an array of available wallets.
 
 **Request Example**
 ```json
@@ -182,8 +188,9 @@ After the preflight checks are successful and all components are installed, runn
 ### 3.b WALLETS_REQUEST
 * **Source:** SK Connect Background Script
 * **Target:** SK Identity Wallet
-* **Endpoint:**  `/WALLETS_REQUEST`
-* **Protocol:**  Websocket Connection
+* **Endpoint:** `/WALLETS_REQUEST`
+* **Protocol:** Websocket Connection
+* **Description:** A request for information about available wallets from the SelfKey Connect Browser Extension to the SelfKey Identity Wallet.  The request message is sent via Websocket Connectino and the wallet will return information about available wallets and also if a wallet is currently unlocked already.
 
 **Request Example**
 ```json
@@ -219,8 +226,9 @@ After the preflight checks are successful and all components are installed, runn
 ### 4.a UNLOCK
 * **Source:** SK Connect iFrame
 * **Target:** SK Connect Background Script
-* **Endpoint:**  `/UNLOCK`
-* **Protocol:**  Chrome Messaging
+* **Endpoint:** `/UNLOCK`
+* **Protocol:** Chrome Messaging
+* **Description:** Submits wallet address and password data from the SK Connect iFrame to the Background Script to be passed on to the SelfKey Identity Wallet.  
 
 **Request Example**
 ```json
@@ -245,8 +253,9 @@ After the preflight checks are successful and all components are installed, runn
 ### 4.b UNLOCK
 * **Source:** SK Connect Background Script
 * **Target:** SK Identity Wallet
-* **Endpoint:**  `/UNLOCK`
-* **Protocol:**  Websockets Connection
+* **Endpoint:** `/UNLOCK`
+* **Protocol:** Websockets Connection
+* **Description:** Submits wallet address and password data from the SK Connect Background Script to the SelfKey Identity Wallet to unlock a specified wallet.  If the correct crendentials are passed on, the wallet will be unlocked and the private key will be available to create the signature required for authentication. 
 
 **Request Example**
 ```json
@@ -274,8 +283,9 @@ After the preflight checks are successful and all components are installed, runn
 ### 5.a ATTR_REQ
 * **Source:** SK Connect iFrame
 * **Target:** SK Connect Background Script
-* **Endpoint:**  `/ATTR_REQ`
-* **Protocol:**  Chrome Messaging
+* **Endpoint:** `/ATTR_REQ`
+* **Protocol:** Chrome Messaging
+* **Description:** Submits an internal request from the SelfKey Connect iFrame to the Background Script for id attribute data and documents.  The request will be passed on to the SelfKey Identity Wallet and if successful will return information data points. 
 
 **Request Example**
 ```json
@@ -337,8 +347,9 @@ After the preflight checks are successful and all components are installed, runn
 ### 5.b ATTR_REQ
 * **Source:** SK Connect Background Script
 * **Target:** SK Identity Wallet
-* **Endpoint:**  `/ATTR_REQ`
-* **Protocol:**  Websockets Connection
+* **Endpoint:** `/ATTR_REQ`
+* **Protocol:** Websockets Connection
+* **Description:** Sends a request from the SK Connect Browser Extension to the SelfKey Identity Wallet for identity data and document information.  A successful request will return an array of attribute details to be displayed in the UI to confirm submission of data before the server authentication process.  
 
 **Request Example**
 ```json
@@ -402,31 +413,23 @@ After the preflight checks are successful and all components are installed, runn
 ### 6.a AUTH_REQ
 * **Source:** SK Connect iFrame
 * **Target:** SK Connect Background Script
-* **Endpoint:**  `/AUTH_REQUEST`
-* **Protocol:**  Chrome Messaging
+* **Endpoint:** `/AUTH_REQUEST`
+* **Protocol:** Chrome Messaging
+* **Description:** Submits an internal message from the SK Connect iFrame to the Background Script with the information needed for the request to the SelfKey Identity Wallet.
 
 **Request Example**
 ```json
 {
+	"request": "signature",
 	"wallet": "0x1234abcd",
-	"signature": "{\"r\":{\"type\":\"Buffer\",\"data\":[215,252,52,209,99,115,65,20,176,235,54,88,127,105,159,87,211,198,96,96,196,194,207,121,162,11,40,127,82,95,131,13]},\"s\":{\"type\":\"Buffer\",\"data\":[80,25,172,33,158,87,250,185,205,28,213,156,102,150,182,82,245,78,175,18,35,87,16,123,160,10,197,42,163,156,2,58]},\"v\":28}",
 	"attributes": [
-		{
-			"key": "first_name",
-			"value": "Bobby"
-		},
-		{
-			"key": "last_name",
-			"value": "Lee"
-		},
-		{
-			"key": "email_address",
-			"value": "bobby@bitcoin.com"
-		},
-		{
-			"key": "phone_number",
-			"value": "18001234567"
-		}
+		"first_name",
+		"last_name",
+		"email_address",
+		"phone_number"
+	],
+	"documents": [
+		"passport"
 	]
 }
 ```
@@ -447,8 +450,46 @@ After the preflight checks are successful and all components are installed, runn
 ### 6.b AUTH_REQ
 * **Source:** SK Connect Background Script
 * **Target:** SK Identity Wallet
-* **Endpoint:**  `/AUTH_REQUEST`
-* **Protocol:**  Websockets Connection
+* **Endpoint:** `/AUTH_REQUEST`
+* **Protocol:** Websockets Connection
+* **Description:** Submits a request for the creation of a signature and the submission of data and documents from the SK Connect Browser Extension to the SelfKey Identity Wallet.  A successful request will trigger a request to the server for the final step in the authentication process.
+
+**Request Example**
+```json
+{
+	"request": "signature",
+	"wallet": "0x1234abcd",
+	"attributes": [
+		"first_name",
+		"last_name",
+		"email_address",
+		"phone_number"
+	],
+	"documents": [
+		"passport"
+	]
+}
+```
+**Response: Success**
+```json
+{
+	"message": "Authentication Successful",
+	"redirectUrl": "/success.html"
+}
+```
+**Response: Error**
+```json
+{
+	"error": "Authentication Failed"
+}
+```
+
+### 6.c LWS_REQUEST
+* **Source:** SK Identity Wallet
+* **Target:** Server Implementation
+* **Endpoint:** `/LWS_REQUEST`
+* **Protocol:** HTTP Request
+* **Description:** Submits an HTTP Request from the SelfKey Identity Wallet to the Server Implementation with a signature, data and documents for authentication.  A successful request will return a redirectUrl that will update the browser and send the user to a URL based on the server implementation configuration.
 
 **Request Example**
 ```json
@@ -472,50 +513,12 @@ After the preflight checks are successful and all components are installed, runn
 			"key": "phone_number",
 			"value": "18001234567"
 		}
-	]
-}
-```
-**Response: Success**
-```json
-{
-	"message": "Authentication Successful",
-	"redirectUrl": "/success.html"
-}
-```
-**Response: Error**
-```json
-{
-	"error": "Authentication Failed"
-}
-```
-
-### 6.c LWS_REQUEST
-* **Source:** SK Identity Wallet
-* **Target:** Server Implementation
-* **Endpoint:**  `/LWS_REQUEST`
-* **Protocol:**  HTTP Request
-
-**Request Example**
-```json
-{
-	"wallet": "0x1234abcd",
-	"signature": "{\"r\":{\"type\":\"Buffer\",\"data\":[215,252,52,209,99,115,65,20,176,235,54,88,127,105,159,87,211,198,96,96,196,194,207,121,162,11,40,127,82,95,131,13]},\"s\":{\"type\":\"Buffer\",\"data\":[80,25,172,33,158,87,250,185,205,28,213,156,102,150,182,82,245,78,175,18,35,87,16,123,160,10,197,42,163,156,2,58]},\"v\":28}",
-	"attributes": [
+	],
+	"documents": [
 		{
-			"key": "first_name",
-			"value": "Bobby"
-		},
-		{
-			"key": "last_name",
-			"value": "Lee"
-		},
-		{
-			"key": "email_address",
-			"value": "bobby@bitcoin.com"
-		},
-		{
-			"key": "phone_number",
-			"value": "18001234567"
+			"type": "passport",
+			"mime-type": "image/jpg",
+			"file": "path/to/file.jpg"
 		}
 	]
 }
