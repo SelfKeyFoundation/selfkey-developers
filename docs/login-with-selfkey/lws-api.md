@@ -1,8 +1,55 @@
 ---
 id: lws-api
-title: API Docs
-sidebar_label: API Docs
+title: Login with SelfKey API Documentation
+sidebar_label: API Documentation
 ---
+
+## Summary of Components
+### Client Implementation
+The client implementation component is the part of the authentication system that is displayed in the browser from the integrators website.  
+
+### SelfKey Connect Browser Extension
+The SelfKey Connect API is a combination of 3 components:
+	* Content Script
+	* iFrame
+	* Background Script
+These 3 components work together with the content script used to interact with the DOM, the iFrame used to manage the UI and the background script used to communicate with the SelfKey Identity Wallet.  To communicate internally within the Browser Extension, Chrome messaging protocol is used and JSON objects with required data are passed from component to component.
+
+### SelfKey Identity Wallet
+The SelfKey Identity Wallet communicates with the SelfKey Connect Browser Extension via a Websockets connection and communicates with the Server Implementation via HTTP requests.
+
+### Server Implementation
+The Server Implementation communicates with the SelfKey Identity Wallet by providing a JSON REST API for HTTP requests.
+
+## Message Body Examples
+### Chrome Messaging
+Messages passed internally using Chrome Messaging between the SelfKey Connect Browser Extension components (Content / iFrame / Background)
+**Request Example**
+```json
+{
+	"type": "getWallets"
+}
+```
+
+### Websockets
+Messages passed between the SelfKey Connect Browser Extension and the SelfKey Identity Wallet using Websockets
+**Request Example**
+```json
+{
+	"type": "getWallet",
+	"address": "0x1234abcd"
+}
+```
+
+### HTTP
+Sent from the SelfKey Identity Wallet either a GET request possibly with query string or a POST request with multipart form data
+**Request Example**
+```json
+{
+	"wallet": "0x1234abcd",
+	"signature": "{\"r\":{\"type\":\"Buffer\",\"data\":[215,252,52,209,99,115,65,20,176,235,54,88,127,105,159,87,211,198,96,96,196,194,207,121,162,11,40,127,82,95,131,13]},\"s\":{\"type\":\"Buffer\",\"data\":[80,25,172,33,158,87,250,185,205,28,213,156,102,150,182,82,245,78,175,18,35,87,16,123,160,10,197,42,163,156,2,58]},\"v\":28}"
+}
+```
 
 # Preflight
 This part of the system is running before in the background before any user interaction takes place.  The purpose is to verify successful connections between the Integrating Client Implementation, SelfKey Connect Browser Extension, SelfKey Identity Wallet and the Integrating LWS API Implementation.  If all connections are working then when the user clicks the Login with SelfKey button in the browser, the authentication process with begin successfully, otherwise an error message with instructions will be displayed to the user explaining which component is not working and instructions on how to download and run the missing component (Browser Extension or Wallet App) This will also handle any errors from the 3rd party implementation having connection issues, for example if the API Implementation is down.
@@ -113,8 +160,6 @@ This part of the system is running before in the background before any user inte
 }
 ```
 
-
-
 # Authentication Flow
 After the preflight checks are successful and all components are installed, running and communicating successfully, the actual authentication flow can begin. 
 
@@ -146,7 +191,6 @@ After the preflight checks are successful and all components are installed, runn
 	"error": "Authentication Failed"
 }
 ```
-
 
 ## 3: Available Wallets
 
@@ -487,7 +531,34 @@ After the preflight checks are successful and all components are installed, runn
 ### 6.c LWS_REQUEST
 * **Source:** SK Identity Wallet
 * **Target:** Server Implementation
-* **Endpoint:** `/LWS_REQUEST`
+* **Endpoint:** GET `/auth/selfkey/`
+* **Protocol:** HTTP Request
+* **Description:** Submits an HTTP Request from the SelfKey Identity Wallet to the Server Implementation requesting a nonce.  The server will return a cryptographically generated nonce to be used for signature creation.  The server implementation should also at this time save the nonce and wallet address to the DB either as a new or existing user.
+
+**Request Example**
+```json
+{
+	"request": "nonce",
+	"wallet": "0x1234abcd"
+}
+```
+**Response: Success**
+```json
+{
+	"nonce": "a1b2c3d4e5f6"
+}
+```
+**Response: Error**
+```json
+{
+	"error": "Internal Server Error"
+}
+```
+
+### 6.d LWS_REQUEST
+* **Source:** SK Identity Wallet
+* **Target:** Server Implementation
+* **Endpoint:** POST `/auth/selfkey`
 * **Protocol:** HTTP Request
 * **Description:** Submits an HTTP Request from the SelfKey Identity Wallet to the Server Implementation with a signature, data and documents for authentication.  A successful request will return a redirectUrl that will update the browser and send the user to a URL based on the server implementation configuration.
 
