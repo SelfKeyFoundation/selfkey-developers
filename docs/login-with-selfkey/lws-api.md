@@ -6,14 +6,14 @@ sidebar_label: API Documentation
 
 ## Summary of Components
 ### Client Implementation
-The client implementation component is the part of the authentication system that is displayed in the browser from the integrators website.  
+The client implementation component is the part of the authentication system that is displayed in the browser from the integrators website.  This includes the code snippets for the button, modal and iFrame as well as the config object. 
 
 ### SelfKey Connect Browser Extension
 The SelfKey Connect API is a combination of 3 components:
-	* Content Script
-	* iFrame
-	* Background Script
-These 3 components work together with the content script used to interact with the DOM, the iFrame used to manage the UI and the background script used to communicate with the SelfKey Identity Wallet.  To communicate internally within the Browser Extension, Chrome messaging protocol is used and JSON objects with required data are passed from component to component.
+* Content Script
+* lws.js (Main Script)
+* Background Script
+These 3 components work together to communicate both internally and externally.   The content script used to interact with the browser DOM, lws.js manages user interaction and the UI state displayed in the iFrame while the background script is used to communicate with the SelfKey Identity Wallet.  To communicate internally within the Browser Extension, Chrome Messaging protocol is used and JSON objects with required data are passed between components.
 
 ### SelfKey Identity Wallet
 The SelfKey Identity Wallet communicates with the SelfKey Connect Browser Extension via a Websockets connection and communicates with the Server Implementation via HTTP requests.
@@ -24,37 +24,72 @@ The Server Implementation communicates with the SelfKey Identity Wallet by provi
 ## Message Body Examples
 ### Chrome Messaging
 Messages passed internally using Chrome Messaging between the SelfKey Connect Browser Extension components (Content / iFrame / Background)
-**Request Example**
+
+#### Example
+**Request**
 ```json
 {
-	"type": "getWallets"
+	"request": "wallets"
+}
+```
+**Response**
+```json
+{
+	"response": "wallets",
+	"wallets": [
+		{
+			"address": "0xabcd1234",
+			"status": "locked"
+		}
+	]
 }
 ```
 
 ### Websockets
 Messages passed between the SelfKey Connect Browser Extension and the SelfKey Identity Wallet using Websockets
-**Request Example**
+
+#### Example
+**Request**
 ```json
 {
-	"type": "getWallet",
-	"address": "0x1234abcd"
+	"request": "unlock",
+	"address": "0x1234abcd",
+	"password": "pass1234"
+}
+```
+**Response**
+```json
+{
+	"response": "unlock",
+	"address": "0x1234abcd",
+	"message": "Keystore Unlocked"
 }
 ```
 
 ### HTTP
 Sent from the SelfKey Identity Wallet either a GET request possibly with query string or a POST request with multipart form data
-**Request Example**
+
+#### Example
+**Request**
 ```json
 {
 	"wallet": "0x1234abcd",
+	"nonce": "54321edcba09876",
 	"signature": "{\"r\":{\"type\":\"Buffer\",\"data\":[215,252,52,209,99,115,65,20,176,235,54,88,127,105,159,87,211,198,96,96,196,194,207,121,162,11,40,127,82,95,131,13]},\"s\":{\"type\":\"Buffer\",\"data\":[80,25,172,33,158,87,250,185,205,28,213,156,102,150,182,82,245,78,175,18,35,87,16,123,160,10,197,42,163,156,2,58]},\"v\":28}"
 }
 ```
+**Response**
+```json
+{
+	"redirectUrl": "/success.html"
+}
+```
 
-# Preflight
-This part of the system is running before in the background before any user interaction takes place.  The purpose is to verify successful connections between the Integrating Client Implementation, SelfKey Connect Browser Extension, SelfKey Identity Wallet and the Integrating LWS API Implementation.  If all connections are working then when the user clicks the Login with SelfKey button in the browser, the authentication process with begin successfully, otherwise an error message with instructions will be displayed to the user explaining which component is not working and instructions on how to download and run the missing component (Browser Extension or Wallet App) This will also handle any errors from the 3rd party implementation having connection issues, for example if the API Implementation is down.
 
 ## 1: Preflight Connect Checks
+This part of the system is running before in the background before any user interaction takes place.  The purpose is to verify successful connections between the Integrating Client Implementation, SelfKey Connect Browser Extension, SelfKey Identity Wallet and the Integrating LWS API Implementation.  
+
+If all connections are working then when the user clicks the Login with SelfKey button in the browser, the authentication process with begin successfully, otherwise an error message with instructions will be displayed to the user explaining which component is not working and instructions on how to download and run the missing component (Browser Extension or Wallet App) This will also handle any errors from the 3rd party implementation having connection issues, for example if the API Implementation is down.
 
 ### 1.a LWS_INIT
 * **Source:** Client Implementation
@@ -66,18 +101,20 @@ This part of the system is running before in the background before any user inte
 **Request Example**
 ```json
 {
-	"message": "ping"
+	"request": "init"
 }
 ```
 **Response: Success**
 ```json
 {
+	"response": "init",
 	"message": "Successfully connected to SelfKey Connect"
 }
 ```
 **Response: Error**
 ```json
 {
+	"response": "init",
 	"error": "Cannot connect to SelfKey Connect"
 }
 ```
@@ -92,18 +129,20 @@ This part of the system is running before in the background before any user inte
 **Request Example**
 ```json
 {
-	"message": "ping"
+	"request": "init"
 }
 ```
 **Response: Success**
 ```json
 {
+	"response": "init",
 	"message": "Successfully connected to Background Script"
 }
 ```
 **Response: Error**
 ```json
 {
+	"response": "init",
 	"error": "SelfKey Connect Internal Error"
 }
 ```
@@ -118,18 +157,20 @@ This part of the system is running before in the background before any user inte
 **Request Example**
 ```json
 {
-	"message": "ping"
+	"request": "init"
 }
 ```
 **Response: Success**
 ```json
 {
+	"response": "init",
 	"message": "Successfully connected to SelfKey Identity Wallet"
 }
 ```
 **Response: Error**
 ```json
 {
+	"response": "init",
 	"error": "Error connecting to SelfKey Identity Wallet"
 }
 ```
@@ -144,12 +185,13 @@ This part of the system is running before in the background before any user inte
 **Request Example**
 ```json
 {
-	"message": "ping"
+	"request": "init"
 }
 ```
 **Response: Success**
 ```json
 {
+	"response": "init",
 	"message": "Successfully connected to LWS API Implementation"
 }
 ```
@@ -160,10 +202,8 @@ This part of the system is running before in the background before any user inte
 }
 ```
 
-# Authentication Flow
-After the preflight checks are successful and all components are installed, running and communicating successfully, the actual authentication flow can begin. 
-
 ## 2: Client Authentication Request
+After the preflight checks are successful and all components are installed, running and communicating successfully, the actual authentication flow can begin. 
 
 ### 2.a AUTH_REQUEST
 * **Source:** Client Implementation
@@ -175,12 +215,13 @@ After the preflight checks are successful and all components are installed, runn
 **Request Example**
 ```json
 {
-	"message": "auth"
+	"request": "auth"
 }
 ```
 **Response: Success**
 ```json
 {
+	"response": "auth",
 	"message": "Authentication Successful",
 	"redirectUrl": "/success.html"
 }
@@ -188,6 +229,7 @@ After the preflight checks are successful and all components are installed, runn
 **Response: Error**
 ```json
 {
+	"response": "auth",
 	"error": "Authentication Failed"
 }
 ```
@@ -204,12 +246,13 @@ After the preflight checks are successful and all components are installed, runn
 **Request Example**
 ```json
 {
-	"message": "getWallets"
+	"request": "wallets"
 }
 ```
 **Response: Success**
 ```json
 {
+	"response": "wallets",
 	"wallets": [
 		{
 			"id": "1",
@@ -225,6 +268,7 @@ After the preflight checks are successful and all components are installed, runn
 **Response: Error**
 ```json
 {
+	"response": "wallets",
 	"error": "No Wallets Found"
 }
 ```
@@ -239,12 +283,13 @@ After the preflight checks are successful and all components are installed, runn
 **Request Example**
 ```json
 {
-	"message": "getWallets"
+	"request": "wallets"
 }
 ```
 **Response: Success**
 ```json
 {
+	"response": "wallets",
 	"wallets": [
 		{
 			"id": "1",
@@ -260,6 +305,7 @@ After the preflight checks are successful and all components are installed, runn
 **Response: Error**
 ```json
 {
+	"response": "wallets",
 	"error": "No Wallets Found"
 }
 ```
@@ -277,19 +323,23 @@ After the preflight checks are successful and all components are installed, runn
 **Request Example**
 ```json
 {
-	"wallet": "0xabcd1234",
+	"request": "unlock",
+	"address": "0xabcd1234",
 	"password": "pass1234"
 }
 ```
 **Response: Success**
 ```json
 {
+	"response": "unlock",
+	"address": "0xabcd1234",
 	"message": "Wallet Unlocked Successfully"
 }
 ```
 **Response: Error**
 ```json
 {
+	"response": "unlock",
 	"error": "Invalid Credentials"
 }
 ```
@@ -304,19 +354,22 @@ After the preflight checks are successful and all components are installed, runn
 **Request Example**
 ```json
 {
-	"wallet": "0xabcd1234",
+	"request": "unlock",
+	"address": "0xabcd1234",
 	"password": "pass1234"
 }
 ```
 **Response: Success**
 ```json
 {
+	"response": "unlock",
 	"message": "Wallet Unlocked Successfully"
 }
 ```
 **Response: Error**
 ```json
 {
+	"response": "unlock",
 	"error": "Invalid Credentials"
 }
 ```
@@ -334,6 +387,7 @@ After the preflight checks are successful and all components are installed, runn
 **Request Example**
 ```json
 {
+	"request": "attributes",
 	"required": [
 		{
 			"name": "First Name",
@@ -361,6 +415,7 @@ After the preflight checks are successful and all components are installed, runn
 **Response: Success**
 ```json
 {
+	"response": "attributes",
 	"attributes": [
 		{
 			"key": "first_name",
@@ -384,6 +439,7 @@ After the preflight checks are successful and all components are installed, runn
 **Response: Error**
 ```json
 {
+	"response": "attributes",
 	"error": "Attrbute Missing"
 }
 ```
@@ -398,6 +454,7 @@ After the preflight checks are successful and all components are installed, runn
 **Request Example**
 ```json
 {
+	"request": "attributes",
 	"required": [
 		{
 			"name": "First Name",
@@ -425,6 +482,7 @@ After the preflight checks are successful and all components are installed, runn
 **Response: Success**
 ```json
 {
+	"response": "attributes",
 	"attributes": [
 		{
 			"key": "first_name",
@@ -448,6 +506,7 @@ After the preflight checks are successful and all components are installed, runn
 **Response: Error**
 ```json
 {
+	"response": "attributes",
 	"error": "Attrbute Missing"
 }
 ```
@@ -480,6 +539,7 @@ After the preflight checks are successful and all components are installed, runn
 **Response: Success**
 ```json
 {
+	"response": "signature",
 	"message": "Authentication Successful",
 	"redirectUrl": "/success.html"
 }
@@ -487,6 +547,7 @@ After the preflight checks are successful and all components are installed, runn
 **Response: Error**
 ```json
 {
+	"response": "signature",
 	"error": "Authentication Failed"
 }
 ```
@@ -517,6 +578,7 @@ After the preflight checks are successful and all components are installed, runn
 **Response: Success**
 ```json
 {
+	"response": "signature",
 	"message": "Authentication Successful",
 	"redirectUrl": "/success.html"
 }
@@ -524,6 +586,7 @@ After the preflight checks are successful and all components are installed, runn
 **Response: Error**
 ```json
 {
+	"response": "signature",
 	"error": "Authentication Failed"
 }
 ```
