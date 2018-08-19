@@ -13,6 +13,7 @@ The SelfKey Connect API is a combination of 3 components:
 * Content Script
 * lws.js (Main Script)
 * Background Script
+
 These 3 components work together to communicate both internally and externally.   The content script used to interact with the browser DOM, lws.js manages user interaction and the UI state displayed in the iFrame while the background script is used to communicate with the SelfKey Identity Wallet.  To communicate internally within the Browser Extension, Chrome Messaging protocol is used and JSON objects with required data are passed between components.
 
 ### SelfKey Identity Wallet

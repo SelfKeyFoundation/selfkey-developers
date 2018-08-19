@@ -25,3 +25,11 @@
     flex: 0 1 500px;
     max-width: 300px;
 }
+
+p {
+	font-size: 80%;
+}
+
+.toc .toggleNav ul li a {
+    font-size: 12px;
+}
