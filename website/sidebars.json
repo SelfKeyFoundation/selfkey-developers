@@ -14,7 +14,8 @@
     ],
     "Login with SelfKey": [
       "login-with-selfkey/lws-intro", 
-      "login-with-selfkey/lws-flow", 
+      "login-with-selfkey/lws-flow",
+      "login-with-selfkey/lws-api",
       "login-with-selfkey/lws-auth",
       "login-with-selfkey/lws-data", 
       "login-with-selfkey/lws-client", 
