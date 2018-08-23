@@ -15,7 +15,7 @@ Login with SelfKey uses a challenge/response mechanism with private key signing 
 
 The SelfKey Foundation provides server libraries for popular languages and web application frameworks to make implementation easier. Please refer to the detailed implementation documentation below if there is no server library available for your preferred language or framework.
 
-## Benefits of LWS
+## Benefits of Login with SelfKey
 * No passwords
 * No private authentication credentials required to be stored in a database
 * One click onboarding with marketplace services

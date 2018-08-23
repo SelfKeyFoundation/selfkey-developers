@@ -4,9 +4,11 @@ title: Authentication Process
 sidebar_label: Authentication Process
 ---
 
-## Ethereum Private Key Signature Authentication
+## Private Key Signature Authentication
 
-In order for the LWS system to work, the user needs to be able to provide proof of ownership of an Ethereum wallet address.  This is done by creating a signature within the SelfKey Identity Wallet (IDW) and then passing the signature to the server integration where it can be verified.  Without a valid signature, any attempt to authenticate using the public key will fail.  
+In order for the LWS system to work, the user needs to be able to provide proof of ownership of a wallet address.  This is done by creating a signature within the SelfKey Identity Wallet (IDW) and then passing the signature to the server integration where it can be verified.  Without a valid signature, any attempt to authenticate using the public key will fail. 
+
+The authentication process is based on secp256k1 ECDSA signing/verification and key generation. 
 
 https://github.com/bitcoin-core/secp256k1
 
@@ -97,4 +99,3 @@ exports.hashPersonalMessage = function (message) {
   return exports.sha3(Buffer.concat([prefix, message]));
 };
 ```
-
