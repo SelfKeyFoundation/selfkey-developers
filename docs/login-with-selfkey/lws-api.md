@@ -23,47 +23,49 @@ The SelfKey Identity Wallet communicates with the SelfKey Connect Browser Extens
 The Server Implementation communicates with the SelfKey Identity Wallet by providing a JSON REST API for HTTP requests.
 
 ## Message Body Examples
-### Chrome Messaging
-Messages passed internally using Chrome Messaging between the SelfKey Connect Browser Extension components (Content / iFrame / Background)
+### Chrome Messaging and Websockets Messages
+Messages are passed internally using Chrome Messaging between the SelfKey Connect Browser Extension components as well as the messages sent between the Background script and the SelfKey Identity Wallet Websocket Server.  Message format is following Flux Standard Action.
 
-#### Example
-**Request**
-```json
-{
-	"request": "wallets"
-}
-```
-**Response**
-```json
-{
-	"response": "wallets",
-	"wallets": [
-		{
-			"address": "0xabcd1234",
-			"status": "locked"
-		}
-	]
-}
-```
+* <img src='/img/github.png' width='30px'>&nbsp;&nbsp;[Flux Standard Action](https://github.com/redux-utilities/flux-standard-action)
 
-### Websockets
-Messages passed between the SelfKey Connect Browser Extension and the SelfKey Identity Wallet using Websockets
-
-#### Example
-**Request**
+#### Examples
 ```json
+// No Payload
 {
-	"request": "unlock",
-	"address": "0x1234abcd",
-	"password": "pass1234"
+    "type": "wallets",
+    "meta": {
+        "id": "lws_bg-8",
+        "src": "lws_bg"
+    }
 }
-```
-**Response**
-```json
+
+// With Payload
 {
-	"response": "unlock",
-	"address": "0x1234abcd",
-	"message": "Keystore Unlocked"
+    "type": "wallets",
+    "meta": {
+        "id": "lws_bg-8",
+        "src": "idw"
+    },
+    "payload": [
+        {
+            "address": "0x1234abcd",
+            "unlocked": false
+        },
+        {
+            "address": "0x5678efgh",
+            "unlocked": true
+        }
+    ]
+}
+
+// Error Message
+{
+    "type": "wallets",
+    "meta": {
+        "id": "idw-8",
+        "src": "idw"
+    },
+    "error": "No wallets found"
 }
 ```
 
@@ -99,24 +101,29 @@ If all connections are working then when the user clicks the Login with SelfKey 
 * **Protocol:** Chrome Messaging
 * **Description:** Initial test connection between the client implementation in the browser DOM and the SelfKey Connect Browser extension via the injected content script.  If the client cannot connect with the browser extension, and error message will be returned which will indicate to the client implementation to display user instructions regarding the installing and running the required components. (SelfKey Connect Browser Extension and SelfKey Identity Wallet)
 
-**Request Example**
+**Example**
 ```json
 {
-	"request": "init"
-}
-```
-**Response: Success**
-```json
-{
-	"response": "init",
-	"message": "Successfully connected to SelfKey Connect"
-}
-```
-**Response: Error**
-```json
-{
-	"response": "init",
-	"error": "Cannot connect to SelfKey Connect"
+    "type": "init",
+    "meta": {
+        "id": "lws_client-1",
+        "src": "lws_client"
+    },
+    "payload": { 
+        "path": "/api/v1/auth/selfkey",
+        "el": ".lwsConfig",
+        "attributes": [ 
+            {     
+                "key": "first_name", 
+                "label": "First Name", 
+                "attribute": "http://platform.selfkey.org/schema/attribute/first-name.json" 
+            }, { 
+                "key": "last_name", 
+                "label": "Last Name", 
+                "attribute": "http://platform.selfkey.org/schema/attribute/last-name.json" 
+            } 
+        ] 
+    }
 }
 ```
 
@@ -130,21 +137,26 @@ If all connections are working then when the user clicks the Login with SelfKey 
 **Request Example**
 ```json
 {
-	"request": "init"
-}
-```
-**Response: Success**
-```json
-{
-	"response": "init",
-	"message": "Successfully connected to Background Script"
-}
-```
-**Response: Error**
-```json
-{
-	"response": "init",
-	"error": "SelfKey Connect Internal Error"
+    "type": "init",
+    "meta": {
+        "id": "lws_client-1",
+        "src": "lws_cs"
+    },
+    "payload": { 
+        "path": "/api/v1/auth/selfkey",
+        "el": ".lwsConfig",
+        "attributes": [ 
+            {     
+                "key": "first_name", 
+                "label": "First Name", 
+                "attribute": "http://platform.selfkey.org/schema/attribute/first-name.json" 
+            }, { 
+                "key": "last_name", 
+                "label": "Last Name", 
+                "attribute": "http://platform.selfkey.org/schema/attribute/last-name.json" 
+            } 
+        ] 
+    }
 }
 ```
 
@@ -158,21 +170,26 @@ If all connections are working then when the user clicks the Login with SelfKey 
 **Request Example**
 ```json
 {
-	"request": "init"
-}
-```
-**Response: Success**
-```json
-{
-	"response": "init",
-	"message": "Successfully connected to SelfKey Identity Wallet"
-}
-```
-**Response: Error**
-```json
-{
-	"response": "init",
-	"error": "Error connecting to SelfKey Identity Wallet"
+    "type": "init",
+    "meta": {
+        "id": "lws_client-1",
+        "src": "lws_bg"
+    },
+    "payload": { 
+        "path": "/api/v1/auth/selfkey",
+        "el": ".lwsConfig",
+        "attributes": [ 
+            {     
+                "key": "first_name", 
+                "label": "First Name", 
+                "attribute": "http://platform.selfkey.org/schema/attribute/first-name.json" 
+            }, { 
+                "key": "last_name", 
+                "label": "Last Name", 
+                "attribute": "http://platform.selfkey.org/schema/attribute/last-name.json" 
+            } 
+        ] 
+    }
 }
 ```
 
@@ -247,30 +264,11 @@ After the preflight checks are successful and all components are installed, runn
 **Request Example**
 ```json
 {
-	"request": "wallets"
-}
-```
-**Response: Success**
-```json
-{
-	"response": "wallets",
-	"wallets": [
-		{
-			"id": "1",
-			"address": "0x1234abcd..."
-		},
-		{
-			"id": "2",
-			"address": "0x5678efgh..."
-		}
-	]
-}
-```
-**Response: Error**
-```json
-{
-	"response": "wallets",
-	"error": "No Wallets Found"
+	"type": "wallets",
+    "meta": {
+        "id": "lws-3",
+        "src": "lws"
+	}
 }
 ```
 
@@ -284,7 +282,11 @@ After the preflight checks are successful and all components are installed, runn
 **Request Example**
 ```json
 {
-	"request": "wallets"
+	"type": "wallets",
+    "meta": {
+        "id": "lws-3",
+        "src": "lws_bg"
+	}
 }
 ```
 **Response: Success**
