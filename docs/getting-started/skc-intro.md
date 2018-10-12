@@ -17,4 +17,8 @@ To create both a convenient user interface and a communications link between the
 * Handles various error cases
 * Redirects to success page in browser
 
+## Development
+
+The SelfKey Connect Browser Extension is a React application that communicates via port messaging to the extension content.js and background.js scripts.  The content.js script communicates with the LWS Client Library while the background.js script communicates with the SelfKey Identity Wallet via a secure Websocket connection.
+
 

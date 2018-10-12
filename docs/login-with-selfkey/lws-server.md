@@ -28,7 +28,7 @@ POST /api/v1/auth/selfkey/login (optional)
 
 ### Nonce Endpoint (`GET /`)
 
-The SelfKey Identity Wallet will make a `GET` request to this endpoint to retrieve a nonce for signing with the user's Ethereum private key. Your implementation must generate the nonce string in a cryptographically-secure fashion and store it in your application's session store in order to validate the signature produced by the SelfKey ID Wallet.
+The SelfKey Identity Wallet will make a `GET` request to this endpoint to retrieve a nonce for signing with the user's Ethereum private key. Your implementation must generate the nonce string in a cryptographically-secure fashion and store it in your application's session store in order to validate the signature produced by the SelfKey ID Wallet.  You can use the selfkey.js library or the SVS API to create the nonce if you prefer to not introduce additional dependencies.
 
 #### Response
 
@@ -45,19 +45,29 @@ The SelfKey Identity Wallet will make a `GET` request to this endpoint to retrie
 The SelfKey Identity Wallet will make a `POST` request to this endpoint containing the signed nonce and the requested identity attributes, if any.
 
 #### Request
-
-- `signature` is the ECDSA signature obtained by signing the nonce string with the user's Ethereum private key, and
-- `attributes` are the requested identity attributes as defined in the client library config.
+- `publicKey` is the ethereum wallet address that the user unlocked to create the signature with the associated private key
+- `nonce` is the nonce used to create the signture along with the private key
+- `signature` is the ECDSA signature obtained by signing the nonce string with the user's Ethereum private key - base64 encoded string
+- `attributes` is an array of the requested identity attributes as defined in the client library config
 
 **Example:**
 
 ```json
 {
-  "signature": "0x9955af11969a2d2a7f860c...",
-  "attributes": {
-    "firstname": "John",
-    "lastname": "Smith"
-  }
+  "publicKey": "2b6a21dc440cebd4bb9b91b27014ace8aa91a0b9",
+  "nonce": "19B0KTk1b3OikJjy6Yjn3y5DfPgxVAT7RQa72d9nXrOO89bIkwMBIcBuSKbWlXAW",
+  "signature": "eyJyIjoiZGRlNjgwYTJkMDhjNTQ4ZWVkNjYwYzA0YWVmODdmYWU4MzM1ZDU0ZTk5YzljZjYxYzY5YWNkZmU3YzQyNWVjNCIsInMiOiIxNzE5NDU3NmE0M2NjYjE3MTE4NTVjMjljMGU0MzAyMTYzMmZkMjY2ZDAzNjhiMzZlODAwN2Q0OTdjZDE3ZjU1IiwidiI6Mjh9",
+  "attributes": [
+    {
+      "first_name": "John"
+    },
+    {
+      "last_name": "Smith"
+    },
+    {
+      "email" : "john@example.com"
+    }
+  ]
 }
 ```
 

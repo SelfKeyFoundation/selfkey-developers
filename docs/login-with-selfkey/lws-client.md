@@ -7,8 +7,8 @@ sidebar_label: Client Configuration
 ## Client Library Overview
 * Provides the Login with SelfKey Button
 * Provides a Modal for displaying LWS related views
-* Provides an iFrame embedded in the modal to view the Browser extension
-* Provides all assets for embedded components (CSS/JS/Images/Fonts)
+* Provides an iFrame embedded in the modal to view the Browser Extension
+* Provides all assets for embedded components (CSS / JS / Images / Fonts)
 
 ## Login with SelfKey Client Configuration
 
@@ -22,18 +22,29 @@ The Login with SelfKey client library accepts a configuration object containing 
 
 We currently support only one `lws.init` call and another can be made only after `lws.teardown`
 
+## API
+```
+Message Sources:
+lws_client
+lws_content
 
-For example:
+Message Types:
+wp_init
+wp_teardown
+wp_auth
+```
+
+Config Example:
 
 ```javascript
 lws.init({
     el: '.lwsClient',
     website: {
-        name: 'LWS Example',
-        url: 'http://localhost:3000/',
-        termsUrl: 'http://localhost:3000/terms.html',
-        policyUrl: 'http://localhost:3000/policy.html',
-        apiUrl: 'http://localhost:3000/api/v1/selfkey/',
+        name: 'LWS Example Site',
+        url: 'http://yoursite.com/',
+        termsUrl: 'http://yoursite/terms.html',
+        policyUrl: 'http://yoursite.com/policy.html',
+        apiUrl: 'http://yoursite.com/api/v1/selfkey/',
     },
     attributes: [
         {
@@ -48,7 +59,13 @@ lws.init({
         },
         {
             key: "email",
-            label: "Email"
+            label: "Email",
+            attribute: "http://platform.selfkey.org/schema/attribute/email.json"
+        },
+        {
+            key: "passport",
+            label: "Passport",
+            attribute: "http://platform.selfkey.org/schema/attribute/passport.json"
         },
     ],
     onAuthResponse: function (err, res) {

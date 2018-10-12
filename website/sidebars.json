@@ -15,13 +15,10 @@
     "Login with SelfKey": [
       "login-with-selfkey/lws-intro", 
       "login-with-selfkey/lws-flow",
-      "login-with-selfkey/lws-api",
       "login-with-selfkey/lws-auth",
       "login-with-selfkey/lws-data", 
       "login-with-selfkey/lws-client", 
-      "login-with-selfkey/lws-server", 
-      "login-with-selfkey/lws-ux",
-      "login-with-selfkey/lws-sandbox"
+      "login-with-selfkey/lws-server"
     ],
     "Additional Projects": [
       "additional-projects/json-schema-intro", 
