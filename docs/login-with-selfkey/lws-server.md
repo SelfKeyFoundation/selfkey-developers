@@ -37,18 +37,18 @@ The SelfKey Identity Wallet will make a `GET` request to this endpoint to retrie
 **Example:**
 
 ```json
-{ "nonce": "u9YGjSOQ4g620ACyYdby" }
+{ "nonce": "u9YGjSOQ4g620ACyYdbyv978gbujhff6fygni9" }
 ```
 
 ### Authentication Endpoint (`POST /`)
 
-The SelfKey Identity Wallet will make a `POST` request to this endpoint containing the signed nonce and the requested identity attributes, if any.
+The SelfKey Identity Wallet will make a `POST` request to this endpoint containing the ethereum address, nonce, signature and the requested identity attributes, if any.
 
 #### Request
 - `publicKey` is the ethereum wallet address that the user unlocked to create the signature with the associated private key
 - `nonce` is the nonce used to create the signture along with the private key
 - `signature` is the ECDSA signature obtained by signing the nonce string with the user's Ethereum private key - base64 encoded string
-- `attributes` is an array of the requested identity attributes as defined in the client library config
+- `attributes` is an array of the requested identity attributes as defined in the client library configuration.  Attributes can consist of string data or documents sent as a base64 encoded data uri string.  
 
 **Example:**
 
@@ -59,13 +59,36 @@ The SelfKey Identity Wallet will make a `POST` request to this endpoint containi
   "signature": "eyJyIjoiZGRlNjgwYTJkMDhjNTQ4ZWVkNjYwYzA0YWVmODdmYWU4MzM1ZDU0ZTk5YzljZjYxYzY5YWNkZmU3YzQyNWVjNCIsInMiOiIxNzE5NDU3NmE0M2NjYjE3MTE4NTVjMjljMGU0MzAyMTYzMmZkMjY2ZDAzNjhiMzZlODAwN2Q0OTdjZDE3ZjU1IiwidiI6Mjh9",
   "attributes": [
     {
-      "first_name": "John"
+      "key": "first_name",
+      "label": "First Name",
+      "document": false,
+      "data": {
+        "value": "John"
+      }
     },
     {
-      "last_name": "Smith"
+      "key": "last_name",
+      "label": "Last Name",
+      "document": false,
+      "data": {
+        "value": "Smith"
+      }
     },
     {
-      "email" : "john@example.com"
+      "key": "email",
+      "label": "Email",
+      "document": false,
+      "data": {
+        "value": "john.smith@example.com"
+      }
+    },
+    {
+      "key": "passport",
+      "label": "Passport",
+      "document": true,
+      "data": {
+        "value": "YTJkMDhjNTQ4ZWVkNjYwYzA0YWVmODdmYWU4MzM1ZDU0ZTk5YzljZjYxYzY5YWNkZmU3YzQyNWVjNCIsInMiOiIxNzE5NDU3NmE0M2NjYjE3MTE4NTVjMjljMGU0MzAyMTYzMjYwYzA0YWVmODdmYWU4MzM1ZDkMDhjNTQ4ZWVkNjYwYzA0YWVmOD"
+      }
     }
   ]
 }
