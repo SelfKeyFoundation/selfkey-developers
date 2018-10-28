@@ -29,7 +29,8 @@
   },
   "resources": {
     "Developer Resources": [
-      "resources/overview"
+      "resources/overview",
+      "resources/svs"
     ],
     "LWS Client Libraries": [
       "resources/lws-js",

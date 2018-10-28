@@ -38,4 +38,8 @@ passport-selfkey is a passportjs Strategy library to integrate Login with SelfKe
 ### Demo Site
 An example implementation of Login with SelfKey in NodeJS can be found in the demo site repository.  It can be used to help integrate Login with SelfKey with your NodeJS API.  
 
+https://github.com/SelfKeyFoundation/selfkey-nodejs-demo
 
+The SelfKey NodeJS Demo (_B*Trade_) is a mock web application that is used for integration testing for the Login w/ SelfKey (LWS) system and the SelfKey Marketplace.  It's built on NodeJS and Express, serves static renders of pages and manages authentication and session using the PassportJS library.  
+
+LWS currently provides some NPM packages along with some custom configuration to integrate.  There is passport-selfkey which is a Strategy library to integrate LWS with the auth and session management provided by the Passport library.  There is selfkey.js which is a collection of functions related to generating and verifying the cryptographic signatures used by LWS as well as additional helper functions. 
