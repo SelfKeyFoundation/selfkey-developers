@@ -3,6 +3,8 @@ id: lws-cs
 title: C# .NET
 ---
 
+<img src='/img/csharp.png' width='240px'>
+
 ## C# ASPNet SDK
 
 ### Server Library

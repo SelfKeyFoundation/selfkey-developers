@@ -3,7 +3,9 @@ id: lws-js
 title: JavaScript
 ---
 
-### Login with SelfKey Javascript Client Library
+<img src='/img/js.png' width='240px'>
+
+## Login with SelfKey Javascript Client Library
 
 https://github.com/SelfKeyFoundation/selfkey-js-client
 
