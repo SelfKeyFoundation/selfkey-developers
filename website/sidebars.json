@@ -17,7 +17,8 @@
       "login-with-selfkey/lws-flow",
       "login-with-selfkey/lws-auth",
       "login-with-selfkey/lws-data", 
-      "login-with-selfkey/lws-client", 
+      "login-with-selfkey/lws-client",
+      "login-with-selfkey/lws-attributes", 
       "login-with-selfkey/lws-server"
     ],
     "Additional Projects": [
