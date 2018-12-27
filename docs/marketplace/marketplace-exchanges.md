@@ -1,7 +1,7 @@
 ---
 id: marketplace-exchanges
 title: Marketplace - Exchanges
-sidebar_label: Exchanges
+sidebar_label: GUIDE: Exchanges
 ---
 
 ## SelfKey Marketplace: Exchanges

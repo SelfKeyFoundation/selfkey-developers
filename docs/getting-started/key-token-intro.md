@@ -1,7 +1,7 @@
 ---
 id: key-token-intro
-title: KEY Token Smart Contract
-sidebar_label: KEY Token Contract
+title: KEY Token
+sidebar_label: KEY Token
 ---
 
 The KEY token is an Ethereum ERC-20 compliant cryptographic token used for access rights and proof of reputation within the SelfKey Network. The KEY token is a trust mechanism that allows participants to exchange value within the SelfKey Ecosystem.

@@ -9,7 +9,7 @@ Login with SelfKey (LWS) is a decentralized authentication solution that leverag
 
 Implementing websites can request users' identity data from the SelfKey Identity Wallet and users may choose which data they wish to share.
 
-Users must install the SelfKey Connect browser extension to use Login with SelfKey.
+Users must install the SelfKey Extension to use Login with SelfKey.
 
 Login with SelfKey uses a challenge/response mechanism with private key signing to identify users. The SelfKey Identity Wallet running on the user's device acts as a credential store for identity informaiton which may be provided as part of the login or registration process.
 

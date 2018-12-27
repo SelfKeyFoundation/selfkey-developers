@@ -4,9 +4,13 @@
       "getting-started/selfkey-intro",
       "getting-started/key-token-intro", 
       "getting-started/idw-intro", 
-      "getting-started/skc-intro"
+      "getting-started/skext-intro"
     ],
-    "Marketplace Integrations": [
+    "SelfKey API": [
+      "selfkey-api/api-intro",
+      "selfkey-api/api-list"
+    ],
+    "SelfKey Marketplace": [
       "marketplace/marketplace-intro",
       "marketplace/marketplace-api",
       "marketplace/marketplace-exchanges", 
@@ -14,12 +18,13 @@
     ],
     "Login with SelfKey": [
       "login-with-selfkey/lws-intro", 
-      "login-with-selfkey/lws-flow",
       "login-with-selfkey/lws-auth",
-      "login-with-selfkey/lws-data", 
       "login-with-selfkey/lws-client",
-      "login-with-selfkey/lws-attributes", 
-      "login-with-selfkey/lws-server"
+      "login-with-selfkey/lws-server",
+      "login-with-selfkey/lws-int-bare",
+      "login-with-selfkey/lws-int-mkt",
+      "login-with-selfkey/lws-int-kyc",
+      "login-with-selfkey/lws-int-full"
     ],
     "Additional Projects": [
       "additional-projects/json-schema-intro", 

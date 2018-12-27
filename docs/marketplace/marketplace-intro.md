@@ -1,7 +1,7 @@
 ---
 id: marketplace-intro
 title: The SelfKey Marketplace
-sidebar_label: About the Marketplace
+sidebar_label: About SelfKey Marketplace
 ---
 
 ## Marketplace Overview
@@ -23,12 +23,3 @@ You can also browse and filter jurisdictions by corporate ownership, minimum sha
 
 Whether you are a digital nomad freelancer wishing to incorporate your business or a company establishing a subsidiary, through your Identity Wallet you can certify your identity documents and securely share it with our corporate services partners to incorporate your company.
 
-## Integration Procedure
-#### Integration & Acceptance Testing 
-Our technical implementation team will work with you to integrate with your existing system using the SelfKey API gateway. For customers without an existing KYC solution who choose to use Quick-KYC by KYC-Chain we will implement their instance at this stage. Optionally, during this time our technical team can assist with Login with SelfKey implementation to make your SelfKey-referred customers’ first experience on your platform quick and easy. 
-
-#### Marketplace Listing 
-Once all of the infrastructure is ready to start accepting new customers we will publish your listing on our marketplace and monitor performance over the coming weeks. 
-
-#### Requirements Gathering 
-Exchange Marketplace Listing Information You will need to verify the information that we have collected about your exchange for your marketplace listing, such as; exchange location, overview, incorporation date and trading pairs. KYC Solution Selection A decision on which KYC solution, provided in detail in the subsequent integration and acceptance testing section, will be used to proceed with integration. KYC Requirements and Policy We will need a copy of your existing KYC document requirements and questionnaires for individuals and corporate customers, if applicable. A copy of your KYC policy, which may include prohibited countries, KYC verification tiers, or user age limits, should also be provided for awareness. 

@@ -1,7 +1,7 @@
 ---
 id: marketplace-incorporations
 title: Marketplace - Incorporations
-sidebar_label: Incorporations
+sidebar_label: GUIDE: Incorporations
 ---
 
 ## SelfKey Marketplace: Incorporations

@@ -1,26 +1,10 @@
 ---
-id: lws-server
-title: Server Implementation
-sidebar_label: Server Implementation
+id: api-list
+title: SelfKey API Endpoints
+sidebar_label: All Endpoints
 ---
 
-## Server Library Overview
-* Dynamic resolution of server domain and routes
-* Dynamic config of requested info
-* Session management for:
-	* New User (create account w/ LWS info)
-	* Existing User w/o LWS (add LWS to email user)
-	* Existing User w/ LWS (add wallet)
-
-## Implementing the LWS API
-
-Your web service must expose the following API endpoints relative to the path defined in the client config object to be compatible with Login with SelfKey.
-
-You may mount the Login with SelfKey API at any path in your application's router, however the relative route structure defined in this document must be maintained.
-
-For example, if you choose to mount the LWS API at https://example.com/api/v1/auth/selfkey you **must** implement each route as follows:
-
-### Full API
+## Full list of available integrations endpoints
 
 #### 1. [GET /auth/challenge](#1-get-auth-challenge)
 #### 2. [POST /auth/challenge](#2-post-auth-challenge)

@@ -1,9 +1,15 @@
 ---
 id: marketplace-api
-title: SelfKey Marketplace API
-sidebar_label: Marketplace API
+title: SelfKey Marketplace Integrations
+sidebar_label: Integration Process
 ---
 
-## SelfKey API Overview
+#### Integration & Acceptance Testing 
+Our technical implementation team will work with you to integrate with your existing system using the SelfKey API gateway. For customers without an existing KYC solution who choose to use Quick-KYC by KYC-Chain we will implement their instance at this stage. Optionally, during this time our technical team can assist with Login with SelfKey implementation to make your SelfKey-referred customers’ first experience on your platform quick and easy. 
 
-The SelfKey API manages connections between the SelfKey Identity Wallet (IDW) and third party integrators that are part of the SelfKey Marketplace.  Currently the SelfKey Marketplace supports the listing of Digital Asset Exchanges and Incorporations Service Providers.  The SelfKey API is required to manage form submission requirements and data exchange formatting, making use of the SelfKey JSON Schema to manage data harmonization requested attributed and documents between the 3rd party integrator and the IDW. The API does not store any user data and is available to be audited by any Marketplace integrator.
+#### Marketplace Listing 
+Once all of the infrastructure is ready to start accepting new customers we will publish your listing on our marketplace and monitor performance over the coming weeks. 
+
+#### Requirements Gathering 
+Exchange Marketplace Listing Information You will need to verify the information that we have collected about your exchange for your marketplace listing, such as; exchange location, overview, incorporation date and trading pairs. KYC Solution Selection A decision on which KYC solution, provided in detail in the subsequent integration and acceptance testing section, will be used to proceed with integration. KYC Requirements and Policy We will need a copy of your existing KYC document requirements and questionnaires for individuals and corporate customers, if applicable. A copy of your KYC policy, which may include prohibited countries, KYC verification tiers, or user age limits, should also be provided for awareness. 
+

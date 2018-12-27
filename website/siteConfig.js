@@ -34,6 +34,7 @@ const siteConfig = {
   headerLinks: [
     {doc: 'getting-started/selfkey-intro', label: 'Docs'},
     {doc: 'resources/overview', label: 'Resources'},
+    {doc: 'selfkey-api/api-list', label: 'API'},
     {page: 'help', label: 'Help'},
     {blog: true, label: 'Blog'},
   ],
@@ -56,7 +57,7 @@ const siteConfig = {
   /* custom fonts for website */
   fonts: {
     myFont: [
-      "Proxima Nova",
+      "Lato",
       "Sans-Serif"
     ],
     myOtherFont: [

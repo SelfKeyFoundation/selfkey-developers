@@ -1,5 +1,9 @@
 /* your custom css */
 
+body,h1,h2,h3,h4,h5,h6,p,a,li {
+  font-family: 'Lato', Arial, Helvetica, sans-serif;
+}
+
 @media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
 }
 
@@ -26,10 +30,20 @@
     max-width: 300px;
 }
 
-p {
+/*p {
 	font-size: 80%;
-}
+}*/
 
 .toc .toggleNav ul li a {
     font-size: 12px;
+}
+
+.notebox {
+	padding: 8px 35px 8px 14px;
+    margin-bottom: 20px;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    border-radius: 4px;
+    color: #3a87ad;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
 }
