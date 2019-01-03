@@ -4,8 +4,6 @@ title: SelfKey API Endpoints
 sidebar_label: All Endpoints
 ---
 
-## Full list of available integrations endpoints
-
 #### 1. [GET /auth/challenge](#1-get-auth-challenge)
 #### 2. [POST /auth/challenge](#2-post-auth-challenge)
 #### 3. [POST /users](#3-post-users)
@@ -18,15 +16,24 @@ sidebar_label: All Endpoints
 
 <hr>
 
-### 1. `GET /auth/challenge`
+## 1. `GET /auth/challenge`
 
-#### Response
+### Description
 
-- `jwt` C-JWT (Challenge Token)
+This is the first endpoint to be called in all integration configurations.  It will return a Challenge JSON Web Token (C-JWT) which is comprised of the following: 
+
+* `sub:` (Subject) The public IP address from which the challenge request originated
+* `nbf:` (Not Before) The epoch timestamp that the JWT was issued at
+* `exp:` (Expiration) The epoch timestamp at which the JWT expires
+* `nonce:` (Number used Once) A random string of bytes (base64-encoded) which must be signed in order to authenticate
+
+The C-JWT will use the nonce to help create the signature required for the authentication process.  
+
+### Response
+
+Status 200: `jwt` C-JWT (Challenge Token)
 
 ```json
-
-200
 
 { 
   "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNDIuMjEuMzEuNTEiLCJpYXQiOjE1MTYyMzkwMjIsImV4cCI6MTUxNjQzOTAyMiwiY2hhbGxlbmdlIjoiMDJiODRjOWIyNzYyZWYzNjVhMzgxNGRlODZmZTFkMzhlNThhOTYzNWM0ZGUwYzI0ZTQ3YjlhYWNkYjI2OTZiOCJ9.ogbU0vpulk0AGRaN51fnaB04hhtVMYy_LA8u-qM0Yh4" 
@@ -36,31 +43,39 @@ sidebar_label: All Endpoints
 
 <hr>
 
-### 2. `POST /auth/challenge`
+## 2. `POST /auth/challenge`
 
-#### Headers
+### Description
+
+In order to authenticate we will send a signature with the C-JWT in the header to this endpoint.  It will return a Wallet JSON Web Token (W-JWT) which is comprised of the following:
+
+* `sub:` (Subject) The wallet’s public key
+* `nbf:` (Not Before) The epoch timestamp that the JWT was issued at
+* `exp:` (Expiration) The epoch timestamp at which the JWT expires
+
+The website origin may be required in the header depending on the integration configuration. 
+
+### Headers
 ```javascript
 Authorization: Bearer <C-JWT>
 User-Agent: SelfkeyIDW/${wallet-version}
 Origin: WEBPAGE URL or 'IDW'
 ```
 
-#### Body
+### Body
 ```javascript
 { 
   "signature": <signature> 
 } 
 ```
 
-#### Response
+### Response
 
-- `jwt` W-JWT (Wallet Token)
+Status 200: `jwt` W-JWT (Wallet Token)
 
 **Example:**
 
 ```json
-
-200
 
 { 
   "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNDIuMjEuMzEuNTEiLCJpYXQiOjE1MTYyMzkwMjIsImV4cCI6MTUxNjQzOTAyMiwiY2hhbGxlbmdlIjoiMDJiODRjOWIyNzYyZWYzNjVhMzgxNGRlODZmZTFkMzhlNThhOTYzNWM0ZGUwYzI0ZTQ3YjlhYWNkYjI2OTZiOCJ9.ogbU0vpulk0AGRaN51fnaB04hhtVMYy_LA8u-qM0Yh4" 
@@ -68,16 +83,20 @@ Origin: WEBPAGE URL or 'IDW'
 
 ```
 
-#### Errors
+### Errors
 
 - 400
 - 401
 
 <hr>
 
-### 3. `POST /users`
+## 3. `POST /users`
 
-#### Headers
+### Description
+
+This endpoint can be used to simultaneously create a new user and submit identity related data and documents for KYC processing.  A W-JWT is required in the header and the body request format for data should follow the example below.  A successful request will return a User Token and allow for an authenticated session in the browser to begin.
+
+### Headers
 ```javascript
 Authorization: Bearer <W-JWT>
 User-Agent: SelfkeyIDW/${wallet-version}
@@ -85,7 +104,7 @@ Origin: WEBPAGE URL or 'IDW'
 Content-Type: multipart/form-data; boundary=Boundary
 ```
 
-#### Body
+### Body
 ```javascript
 
 --Boundary
@@ -121,41 +140,44 @@ Content-Disposition: form-data; name="$document-2"
 
 ```
 
-#### Response
+### Response
+
+Status 201: JSON `message` and User `token`
 
 ```json
 
-201
-
 { 
-  "message": "User Created Successfully" 
+  "message": "User Created Successfully",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNDIuMjEuMzEuNTEiLCJpYXQiOjE1MTYyMzkwMjIsImV4cCI6MTUxNjQzOTAyMiwiY2hhbGxlbmdlIjoiMDJiODRjOWIyNzYyZWYzNjVhMzgxNGRlODZmZTFkMzhlNThhOTYzNWM0ZGUwYzI0ZTQ3YjlhYWNkYjI2OTZiOCJ9.ogbU0vpulk0AGRaN51fnaB04hhtVMYy_LA8u-qM0Yh4"
 }
 
 ```
 
-#### Errors
+### Errors
 
 - 400
 - 401
 
 <hr>
 
-### 4. `GET /auth/token`
+## 4. `GET /auth/token`
 
-#### Headers
+### Description
+
+Returns a user token.  Requires a valid W-JWT in the header to return successfully.
+
+### Headers
 ```javascript
 Authorization: Bearer <W-JWT>
 User-Agent: SelfkeyIDW/${wallet-version}
 Origin: WEBPAGE URL or 'IDW'
 ```
 
-#### Response
+### Response
 
-- `token` User Token
+Status 200: User `token`
 
 ```json
-
-200
 
 { 
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNDIuMjEuMzEuNTEiLCJpYXQiOjE1MTYyMzkwMjIsImV4cCI6MTUxNjQzOTAyMiwiY2hhbGxlbmdlIjoiMDJiODRjOWIyNzYyZWYzNjVhMzgxNGRlODZmZTFkMzhlNThhOTYzNWM0ZGUwYzI0ZTQ3YjlhYWNkYjI2OTZiOCJ9.ogbU0vpulk0AGRaN51fnaB04hhtVMYy_LA8u-qM0Yh4" 
@@ -163,30 +185,36 @@ Origin: WEBPAGE URL or 'IDW'
 
 ```
 
-#### Errors
+### Errors
 
 - 400
 - 404
 
 <hr>
 
-### 5. `POST /login`
+## 5. `POST /login`
 
-#### Headers
+### Description
+
+Dedicated endpoint for login purposes.  Returns a redirect URL that will create an authenticated session in the browser.  
+
+### Headers
 ```javascript
 Authorization: Bearer <W-JWT>
 User-Agent: SelfkeyIDW/${wallet-version}
 Origin: WEBPAGE URL or 'IDW'
 ```
 
-#### Body
+### Body
 ```javascript
 { 
   "token": <token> 
 } 
 ```
 
-#### Response
+### Response
+
+Status: 200 `redirectUrl`
 
 ```json
 
@@ -198,7 +226,7 @@ Origin: WEBPAGE URL or 'IDW'
 
 ```
 
-#### Errors
+### Errors
 
 - 400
 - 401
@@ -206,15 +234,19 @@ Origin: WEBPAGE URL or 'IDW'
 
 <hr>
 
-### 6. `GET /templates`
+## 6. `GET /templates`
 
-#### Response
+<div class="notebox">KYC-Chain API Endpoint</div>
 
-- `templates` Array of templates
+### Description
+
+Returns an array of KYC Templates.
+
+### Response
+
+Status 200: Array of `templates`
 
 ```json
-
-200
 
 { 
   "templates": [ 
@@ -231,15 +263,19 @@ Origin: WEBPAGE URL or 'IDW'
 
 <hr>
 
-### 7. `GET /templates/{templateId}/schema.json`
+## 7. `GET /templates/{templateId}/schema.json`
 
-#### Response
+<div class="notebox">KYC-Chain API Endpoint</div>
 
-- `template` Single template
+### Description
+
+Returns a single KYC Template.
+
+### Response
+
+Status 200: Single `template`
 
 ```json
-
-200
 
 {
   "template": { 
@@ -249,33 +285,39 @@ Origin: WEBPAGE URL or 'IDW'
 
 ```
 
-#### Errors
+### Errors
 
 - 404
 
 <hr>
 
-### 8. `POST /files`
+## 8. `POST /files`
 
-#### Headers
+<div class="notebox">KYC-Chain API Endpoint</div>
+
+### Description
+
+Submit files 
+
+### Headers
 ```javascript
 Authorization: Bearer <W-JWT>
 User-Agent: SelfkeyIDW/${wallet-version}
 Origin: WEBPAGE URL or 'IDW'
 ```
 
-#### Body
+### Body
 ```javascript
 { 
   "file": <file> 
 } 
 ```
 
-#### Response
+### Response
+
+Status 200: `fileId`
 
 ```json
-
-200
 
 { 
   "fileId": "1234" 
@@ -283,25 +325,29 @@ Origin: WEBPAGE URL or 'IDW'
 
 ```
 
-#### Errors
+### Errors
 
 - 400
 - 401
 
 <hr>
 
-### 9. `POST /applications`
+## 9. `POST /applications`
 
 <div class="notebox">KYC-Chain API Endpoint</div>
 
-#### Headers
+### Description
+
+Submit a KYC application process 
+
+### Headers
 ```javascript
 Authorization: Bearer <W-JWT>
 User-Agent: SelfkeyIDW/${wallet-version}
 Origin: WEBPAGE URL or 'IDW'
 ```
 
-#### Body
+### Body
 ```javascript
 { 
   "templateId": <template_id>,
@@ -310,11 +356,11 @@ Origin: WEBPAGE URL or 'IDW'
 } 
 ```
 
-#### Response
+### Response
+
+Status 201: JSON `message`
 
 ```json
-
-201
 
 { 
   "message": "Application Created" 
@@ -322,7 +368,7 @@ Origin: WEBPAGE URL or 'IDW'
 
 ```
 
-#### Errors
+### Errors
 
 - 400
 - 401
